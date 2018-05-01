@@ -24,6 +24,24 @@ The following binds are 'Left Ctrl', '[' and ']' respectively. Note that the KEY
 #define KEY_BUTTON_B 0x30
 ```
 
+Key modifiers are defined in the IEEE HID Spec as follows:
+```
+LEFT  CONTROL          1    # 00000001 as binary
+LEFT  SHIFT            2    # 00000010
+LEFT  ALT              4    # 00000100
+LEFT  CMD|WIN          8    # 00001000
+RIGHT CONTROL          16   # 00010000
+RIGHT SHIFT            32   # 00100000
+RIGHT ALT              64   # 01000000
+RIGHT CMD|WIN          128  # 10000000
+```
+
+Modifiers can be combined:
+```
+LEFT CTRL + LEFT SHFIT = 1 + 2 = 3
+LEFT CTRL + LEFT ALT + LEFT SHIFT = 1 + 2 + 4 = 7
+```
+
 For serial code references please see [http://www.usb.org/developers/hidpage/Hut1_12v2.pdf](http://www.usb.org/developers/hidpage/Hut1_12v2.pdf)
 
 
