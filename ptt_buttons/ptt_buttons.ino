@@ -7,8 +7,14 @@
 #define KEY_RIGHT_ALT 64
 
 // Set Key values
-#define KEY_BUTTON_A 0x2F  // Left square bracket [
-#define KEY_BUTTON_B 0x30  // Right square bracket ]
+#define KEY_LEFT_SQUARE 0x2F  // Left square bracket [
+#define KEY_RIGHT_SQUARE 0x30  // Right square bracket ]
+#define KEY_NUM_LOCK 0x53  // Num lock
+#define KEY_F20 0x6F       // F20
+#define KEY_F21 0x70       // F21
+#define KEY_F22 0x71
+#define KEY_F23 0x72
+#define KEY_F24 0x73
 
 // Map buttons to Pins
 #define PIN_BUTTON_MODIFIER 2
@@ -83,11 +89,11 @@ void GetButtonState() {
   int buttonStateB = digitalRead(PIN_BUTTON_B);
 
   //Set Modifier Value
-  SetModifier(buttonStateModifier, buttonStateA, buttonStateB);
+  SetModifier(buttonStateModifier);
 
   //Set Button A value
   if (buttonStateA == HIGH) {
-    readState[2] = KEY_BUTTON_A;
+    readState[2] = KEY_F20;
   }
   if (buttonStateA == LOW) {
     readState[2] = defaultValue;
@@ -95,24 +101,19 @@ void GetButtonState() {
 
   //Set Button B value
   if (buttonStateB == HIGH) {
-    readState[3] = KEY_BUTTON_B;
+    readState[3] = KEY_NUM_LOCK;
   }
   if (buttonStateB == LOW) {
     readState[3] = defaultValue;
   }
 }
 
-void SetModifier(int buttonStateModifier, int buttonStateA, int buttonStateB) {
+void SetModifier(int buttonStateModifier) {
 
   int modifierCombined = 0;
 
-  // We always want to have the KEY_RIGHT_ALT key pressed if A or B are pressed
-  if (buttonStateA == HIGH || buttonStateB == HIGH) {
-    modifierCombined = modifierCombined + KEY_RIGHT_ALT;
-  }
-
   if (buttonStateModifier == HIGH) {
-    modifierCombined = modifierCombined + KEY_RIGHT_SHIFT;
+    modifierCombined = KEY_RIGHT_CTRL;
   }
   // Set modifier array element to the required int value based on button states
   readState[0] = modifierCombined;
